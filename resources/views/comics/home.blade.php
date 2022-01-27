@@ -26,7 +26,7 @@
           <td>{{ $comic->title }}</td>
           <td>{{ $comic->series }}</td>
           <td>{{ $comic->price }}</td>
-          <td>xxx</td>
+          <td class="btn btn-success">SHOW</td>
         </tr>    
       @endforeach
       
