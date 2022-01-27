@@ -26,13 +26,17 @@
           <td>{{ $comic->title }}</td>
           <td>{{ $comic->series }}</td>
           <td>{{ $comic->price }}</td>
-          <td class="btn btn-success">SHOW</td>
+          <td><a class="btn btn-success" href="{{route('comics.show', $comic)}}">SHOW</a></td>
         </tr>    
       @endforeach
       
     </tbody>
   </table>
 
+</div>
+
+<div class="container">
+  {{ $comics->links() }}
 </div>
   
 @endsection

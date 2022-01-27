@@ -15,7 +15,7 @@ class ComicController extends Controller
     public function index()
     {
 
-        $comics = Comic::all();
+        $comics = Comic::paginate(7);
         // $comics = Comic::select('*')->get();
         //dd($comics);
         return view('comics.home', compact('comics'));
@@ -50,7 +50,10 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        //
+        // dd($id);
+        $comic = Comic::find($id);
+        // dd($comic);
+        return view('comics.show', compact('comic'));
     }
 
     /**
