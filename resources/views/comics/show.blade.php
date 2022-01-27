@@ -20,6 +20,9 @@
     <p>{{ $comic->description }}</p>
   </div>
 
+  {{-- BACK BUTTON --}}
+  <a class="my-5" href="{{route('comics.index')}}"> <<-BACK </a>
+
 </div>
   
 @endsection
