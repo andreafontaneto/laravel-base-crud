@@ -45,18 +45,27 @@ class ComicController extends Controller
         $data = $request->all();
 
         // una volta che ho tutti i dati creo un nuovo oggetto Comic
-        // gli passo tutti i dati tramite la mia variabile $data
         $new_comic = new Comic();
-        $new_comic->title = $data['title'];
-        $new_comic->image = $data['image'];
-        $new_comic->price = $data['price'];
-        $new_comic->series = $data['series'];
-        $new_comic->sales_date = $data['sales_date'];
-        $new_comic->type = $data['type'];
-        $new_comic->description = $data['description'];
-        // aggiungo anche lo "slug"
-        $new_comic->slug = Str::slug($new_comic->title , '-');
-        // dd($new_comic);
+        
+        // gli passo tutti i dati tramite la mia variabile $data
+        
+        // $new_comic->title = $data['title'];
+        // $new_comic->image = $data['image'];
+        // $new_comic->price = $data['price'];
+        // $new_comic->series = $data['series'];
+        // $new_comic->sales_date = $data['sales_date'];
+        // $new_comic->type = $data['type'];
+        // $new_comic->description = $data['description'];
+        // // aggiungo anche lo "slug"
+        // $new_comic->slug = Str::slug($new_comic->title , '-');
+        // // dd($new_comic);
+
+        // anzichè fare tutti gli associamenti tramite $data (vedi sopra) gli dico di riempire (fill) il mio nuovo oggetto con i campi "necessari" impostati nel Model tramite $fillable
+        // ma prima definisco lo slug perchè richiesto
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $new_comic->fill($data);
+
         $new_comic->save();
 
         // una volta salvato il dato nel DB...

@@ -10,10 +10,12 @@
     <a class="btn btn-primary" href="">EDIT</a>
   </div>
 
-  <div class="d-flex align-items-center">
-    <img class="img-fluid mb-5 pr-5" src="{{ $comic->image }}" alt="{{ $comic->title }}">
+  <div class="row">
+    <div class="col-6">
+      <img class="img-fluid mb-5 pr-5" src="{{ $comic->image }}" alt="{{ $comic->title }}">
+    </div>
   
-    <div class="mb-3">
+    <div class="col-6 mb-3">
       <h5>Serie originale: {{ $comic->series }}</h4>
       <h5>In vendita dal: {{ $comic->sales_date }}</h5>
       <h3>Prezzo: {{ $comic->price }}€</h3>
@@ -25,6 +27,7 @@
 
     {{-- se la description contenesse tag html bisogna scrivere {!! + testo + !!} --}}
     {{-- <p>{!! $comic->description !!}</p> --}} 
+
   </div>
 
   {{-- BACK BUTTON --}}
