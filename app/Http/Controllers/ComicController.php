@@ -61,7 +61,7 @@ class ComicController extends Controller
         // // dd($new_comic);
 
         // anzichè fare tutti gli associamenti tramite $data (vedi sopra) gli dico di riempire (fill) il mio nuovo oggetto con i campi "necessari" impostati nel Model tramite $fillable
-        // ma prima definisco lo slug perchè richiesto
+        // ...ma prima definisco lo slug perchè richiesto da $fillable nel Model
         $data['slug'] = Str::slug($data['title'], '-');
 
         $new_comic->fill($data);
@@ -112,7 +112,14 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        // dd($id);
+        $comic = Comic::find($id);
+        // dd($comic);
+
+        if($comic){
+            return view('comics.edit', compact('comic'));
+        }
+        abort(404, 'Spiacenti, ma il prodotto non è presente nel database');
     }
 
     /**
@@ -122,9 +129,18 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        // da EDIT fatto il submit prendo tutti i dati che arrivano e li salvo 
+        $data = $request->all();
+
+        // prendo la mia variabile "comic" e gli aggiorno (update) i vecchi $data con i nuovi $data appena arrivati che verranno ri-salvati nel mio DB
+        // ...ma prima definisco lo slug perchè richiesto da $fillable nel Model
+        // createSlug() è una funzione privata creata per tenere ordinato il codice
+        $data['slug'] = $this->createSlug($data['title']);
+        $comic->update($data);
+
+        return redirect()->route('comics.show',compact('comic'));
     }
 
     /**
@@ -136,5 +152,10 @@ class ComicController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // posso anche aggiungere le mie funzioni personali (private!) per aiutarmi nella stesura del codice
+    private function createSlug($string){
+        return Str::slug($string, '-');
     }
 }

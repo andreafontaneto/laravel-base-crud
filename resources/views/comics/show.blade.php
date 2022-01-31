@@ -7,7 +7,7 @@
   <h1 class="mb-3">{{ $comic->title }}</h1>
   
   <div class="my-3">
-    <a class="btn btn-primary" href="">EDIT</a>
+    <a class="btn btn-primary" href="{{ route('comics.edit', $comic) }}">EDIT</a>
   </div>
 
   <div class="row">
