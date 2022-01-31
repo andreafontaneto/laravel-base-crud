@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ComicController extends Controller
 {
@@ -16,6 +17,7 @@ class ComicController extends Controller
     {
 
         $comics = Comic::paginate(7);
+        // $comics = Comic::all();
         // $comics = Comic::select('*')->get();
         //dd($comics);
         return view('comics.index', compact('comics'));
@@ -39,7 +41,31 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // salvo dentro $data tutti i name dei campi del form inviati nella request
+        $data = $request->all();
+
+        // una volta che ho tutti i dati creo un nuovo oggetto Comic
+        // gli passo tutti i dati tramite la mia variabile $data
+        $new_comic = new Comic();
+        $new_comic->title = $data['title'];
+        $new_comic->image = $data['image'];
+        $new_comic->price = $data['price'];
+        $new_comic->series = $data['series'];
+        $new_comic->sales_date = $data['sales_date'];
+        $new_comic->type = $data['type'];
+        $new_comic->description = $data['description'];
+        // aggiungo anche lo "slug"
+        $new_comic->slug = Str::slug($new_comic->title , '-');
+        // dd($new_comic);
+        $new_comic->save();
+
+        // una volta salvato il dato nel DB...
+        
+        // ...con index si torna all'elenco generale
+        // return redirect()->route('comics.index');
+
+        // ...con show si atterra alla pagina di descrizione
+        return redirect()->route('comics.show', $new_comic);
     }
 
     /**

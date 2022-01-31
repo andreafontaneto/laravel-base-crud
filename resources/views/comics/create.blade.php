@@ -13,13 +13,14 @@
         {{-- @csfr è un token univoco che genera Laravel per assicurarsi che la chiamata POST avvenga tramite un form del sito --}}
         @csrf
 
+        {{-- il name del'input deve corrispondere al nome della colonna fatta nel DB --}}
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input 
           type="text" 
           class="form-control" 
           id="title" 
-          name="title"
+          name="title" 
           placeholder="Comic title">
         </div>
         <div class="mb-3">
@@ -34,7 +35,7 @@
         <div class="mb-3">
           <label for="price" class="form-label">Price</label>
           <input 
-          type="text" 
+          type="number" 
           class="form-control" 
           id="price" 
           name="price"
