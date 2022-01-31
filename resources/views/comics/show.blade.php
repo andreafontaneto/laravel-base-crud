@@ -6,8 +6,18 @@
 
   <h1 class="mb-3">{{ $comic->title }}</h1>
   
-  <div class="my-3">
-    <a class="btn btn-primary" href="{{ route('comics.edit', $comic) }}">EDIT</a>
+  <div class="my-3 d-flex">
+    {{-- EDIT BUTTON --}}
+    <a class="mr-3 btn btn-primary" href="{{ route('comics.edit', $comic) }}">EDIT</a>
+    {{-- DELETE BUTTON --}}
+    <form action="{{ route('comics.destroy', $comic) }}" method="POST">
+      @csrf
+      {{-- aggiungiamo il metodo DELETE tramite Blade
+      {{-- chiamerà il metodo "destroy"(passandogli il parametro necessario) --}}
+      @method('DELETE')
+      {{-- il link "a" diventa un "button" con "submit" quindi senza "href" --}}
+      <button type="submit" class="btn btn-danger">DELETE</button>
+    </form>
   </div>
 
   <div class="row">
