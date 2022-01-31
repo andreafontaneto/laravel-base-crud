@@ -7,6 +7,9 @@
     <li class="nav-item">
       <a class="nav-link @if (Route::currentRouteName() === 'comics.index') 'active' @endif " href="{{ route('comics.index') }}">COMICS LIST</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link @if (Route::currentRouteName() === 'comics.create') 'active' @endif " href="{{ route('comics.create') }}">ADD NEW COMIC</a>
+    </li>
   </ul>
 
 </header>
