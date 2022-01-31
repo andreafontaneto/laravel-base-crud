@@ -18,7 +18,7 @@ class ComicController extends Controller
         $comics = Comic::paginate(7);
         // $comics = Comic::select('*')->get();
         //dd($comics);
-        return view('comics.home', compact('comics'));
+        return view('comics.index', compact('comics'));
     }
 
     /**
@@ -53,8 +53,21 @@ class ComicController extends Controller
         // dd($id);
         $comic = Comic::find($id);
         // dd($comic);
-        return view('comics.show', compact('comic'));
+
+        if($comic){
+            return view('comics.show', compact('comic'));
+        }
+        abort(404, 'Spiacenti, ma il prodotto non è presente nel database');
+        
     }
+
+    // public function show(Comic $comic)
+    // {
+    //     // sostituisco $id con la mia classe Comic
+    //     // salvo in una variabile $comic la mia classe
+    //     // tolgo il ::find perchè lo fa in automatico se   aggiungo la mia classe in show()
+    //     return view('comics.show', compact('comic'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
