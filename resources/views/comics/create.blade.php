@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{-- per leggere gli errori del metodo validate nel controller --}}
+{{-- per leggere gli errori generati dal metodo validate nel controller --}}
 {{-- @dump($errors->all()) --}}
 
 <main class="container">
@@ -11,6 +11,7 @@
     <div class="col-8 offset-2">
 
       {{-- SE c'è qualche (any) errore stampa l'alert --}}
+      {{-- any() restituisce true o false --}}
       @if ($errors->any())
         <div class="alert alert-danger" role="alert">
           {{-- l'alert sarà l'errore generato dalla validazione impostata sul ComicController --}}

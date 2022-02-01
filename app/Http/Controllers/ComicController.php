@@ -42,11 +42,14 @@ class ComicController extends Controller
     public function store(Request $request)
     {
         // prima di passare i dati si fa la validazione con validate()
-        // validate() crea un array...
-        // ...con i dati da validare come chiave e delle "regole" impostate da noi (seguendo le migration) come valore
+        // validate() crea un array associativo...
+        // ...con i campi da validare come chiave (prendendo i name degli input)
+        //...e delle "regole" impostate da noi (seguendo le migration) come valore
         // con "required" il campo è RICHIESTO quindi finchè non si inseriesce non si passa al campo successivo
         // max e min sono quanti caratteri (massimi e minimi) sono richiesti
         $request->validate(
+            // il metodo validate() di request accetta 2 parametri
+            // il primo sono tutti i campi da validare...
             [
                 'title'=>"required|max:50|min:2",
                 // possiamo saltare il controllo di description perchè è nullable()
@@ -56,6 +59,35 @@ class ComicController extends Controller
                 'series'=>"required|max:50|min:2",
                 'sales_date'=>"required|max:10",
                 'type'=>"required|max:20|min:2"
+            ],
+            // ...come secondo c'è l'array con i messaggi di errore
+            // gli errori sono customizzabili
+            [
+                // con :max e :min va a leggere il numero di caratteri consentiti
+
+                'title.required'=>'il titolo è obbligatorio',
+                'title.max'=>'il titolo deve essere massimo :max caratteri',
+                'title.min'=>'il titolo deve essere minimo :min caratteri',
+
+                'image.required'=>'l\'indirizzo dell\'immagine è obbligatorio',
+                'image.max'=>'l\'indirizzo dell\'immagine deve essere massimo :max caratteri',
+
+                'price.required'=>'il prezzo è obbligatorio',
+                'price.numeric'=>'il prezzo deve essere un numero',
+                'price.max'=>'il prezzo deve essere massimo :max caratteri',
+                'price.min'=>'il prezzo deve essere minimo :min carattere',
+
+                'series.required'=>'la serie è obbligatoria',
+                'series.max'=>'la serie deve essere massimo :max caratteri',
+                'series.min'=>'la serie deve essere minimo :min caratteri',
+
+                'sales_date.required'=>'la data di vendita è obbligatoria',
+                'sales_date.max'=>'la data di vendita deve essere massimo :max caratteri',
+
+                'type.required'=>'il tipo è obbligatorio',
+                'type.max'=>'il tipo deve essere massimo :max caratteri',
+                'type.min'=>'il tipo deve essere minimo :min caratteri',
+
             ]
         );
 
