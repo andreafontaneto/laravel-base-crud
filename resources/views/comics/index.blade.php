@@ -30,7 +30,9 @@
           <td><a class="btn btn-primary" href="{{route('comics.edit', $comic)}}">EDIT</a></td>
           <td>
             {{-- devo usare il form con metodo DELETE perchè con un link normale invierei in GET --}}
-            <form action="{{ route('comics.destroy', $comic) }}" method="POST">
+            <form 
+            onsubmit="return confirm('Confermi eliminazione di {{$comic->title}}?')"
+            action="{{ route('comics.destroy', $comic) }}" method="POST">
               @csrf
               {{-- aggiungiamo il metodo DELETE tramite Blade
               {{-- chiamerà il metodo "destroy"(passandogli il parametro necessario) --}}
