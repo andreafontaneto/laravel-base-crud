@@ -41,6 +41,24 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        // prima di passare i dati si fa la validazione con validate()
+        // validate() crea un array...
+        // ...con i dati da validare come chiave e delle "regole" impostate da noi (seguendo le migration) come valore
+        // con "required" il campo è RICHIESTO quindi finchè non si inseriesce non si passa al campo successivo
+        // max e min sono quanti caratteri (massimi e minimi) sono richiesti
+        $request->validate(
+            [
+                'title'=>"required|max:50|min:2",
+                // possiamo saltare il controllo di description perchè è nullable()
+                // 'description'=>"required|min:5",
+                'image'=>"required|max:255",
+                'price'=>"required|numeric|max:10|min:1",
+                'series'=>"required|max:50|min:2",
+                'sales_date'=>"required|max:10",
+                'type'=>"required|max:20|min:2"
+            ]
+        );
+
         // salvo dentro $data tutti i name dei campi del form inviati nella request
         $data = $request->all();
 

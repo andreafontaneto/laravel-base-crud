@@ -2,10 +2,27 @@
 
 @section('content')
 
+{{-- per leggere gli errori del metodo validate nel controller --}}
+{{-- @dump($errors->all()) --}}
+
 <main class="container">
 
   <div class="row">
     <div class="col-8 offset-2">
+
+      {{-- SE c'è qualche (any) errore stampa l'alert --}}
+      @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+          {{-- l'alert sarà l'errore generato dalla validazione impostata sul ComicController --}}
+          <ul>
+            {{-- per ogni errore ($error) nell'array ($errors->all())... --}}
+            @foreach ($errors->all() as $error)
+              {{-- ...stampa l'errore --}}
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>  
+      @endif
 
       <h1 class="mb-3">CREATE</h1>
   
