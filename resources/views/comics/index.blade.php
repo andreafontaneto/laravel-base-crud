@@ -2,6 +2,11 @@
 
 @section('content')
 
+{{-- per stampare tutte le informazioni presenti in sessione --}}
+{{-- confermando l'eliminazione di un fumetto...
+dichiaro che ESISTE una variabile di sessione "deleted" (impostata sul ComicController) che quindi non è NULL e la visualizzerò (tramite dump) --}}
+@dump(session()->all());
+
 {{-- @dump($comics); --}}
 
 <div class="container">
