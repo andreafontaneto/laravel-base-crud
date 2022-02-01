@@ -2,14 +2,22 @@
 
 @section('content')
 
-{{-- per stampare tutte le informazioni presenti in sessione --}}
-{{-- confermando l'eliminazione di un fumetto...
-dichiaro che ESISTE una variabile di sessione "deleted" (impostata sul ComicController) che quindi non è NULL e la visualizzerò (tramite dump) --}}
-@dump(session()->all());
-
 {{-- @dump($comics); --}}
 
+{{-- per stampare tutte le informazioni presenti in sessione --}}
+{{-- confermando l'eliminazione di un fumetto...
+dichiaro che ESISTE (quindi è true) una variabile di sessione "deleted" (impostata sul ComicController) che quindi non è NULL e la visualizzerò (tramite dump) --}}
+{{-- @dump(session()->all()); --}}
+
 <div class="container">
+
+  {{-- SE esiste la variabile di sessione "deleted" stampa l'alert --}}
+  @if (session('deleted'))
+    <div class="alert alert-danger" role="alert">
+      {{-- l'alert sarà il messaggio impostato sul ComicController --}}
+      {{session('deleted')}}
+    </div>  
+  @endif
 
   <h1>HOME CRUD - comic list</h1>
 

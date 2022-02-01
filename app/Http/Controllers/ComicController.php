@@ -156,7 +156,7 @@ class ComicController extends Controller
         // qui finiamo con un return base
         // return redirect()->route('comics.index');
 
-        // qui dichiariamo con "with" una variabile di sessione "deleted" che ha come valore il messaggio di avvenuta cancellazione
+        // qui dichiariamo e inviamo in sessione con "with" una variabile di sessione "deleted" che ha come valore il messaggio di avvenuta cancellazione
         return redirect()->route('comics.index')->with('deleted', "Il fumetto $comic->title è stato eliminato");
         /* con apici doppi "" possiamo scrivere le variabili php */
         /* con apici singoli '' non si può fare */
