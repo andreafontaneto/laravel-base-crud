@@ -38,7 +38,11 @@
           type="text"
            {{-- aggiungiamo dentro class="" un @error per aggiungere la classe is-invalid --}}
            {{-- la classe "is-invalid" colora il bordo del campo di rosso --}}
-          class="form-control @error('title') is-invalid @enderror" 
+          class="form-control @error('title') is-invalid @enderror"
+           {{-- aggiugngiamo un value con metodo old() --}}
+           {{-- gli passo il name dell'input come parametro sottoforma di stringa --}}
+           {{-- SE esiste il parametro me lo stampa quindi tiene in memoria tutto quello "mandato" nel form --}}
+          value="{{ old('title') }}"
           id="title" 
           name="title" 
           placeholder="Comic title">
@@ -56,7 +60,8 @@
           <label for="image" class="form-label">Image</label>
           <input 
           type="text" 
-          class="form-control @error('image') is-invalid @enderror" 
+          class="form-control @error('image') is-invalid @enderror"
+          value="{{ old('image') }}" 
           id="image" 
           name="image"
           placeholder="URL image">
@@ -71,7 +76,8 @@
           <input 
           type="number"
           step=0.01 
-          class="form-control @error('price') is-invalid @enderror" 
+          class="form-control @error('price') is-invalid @enderror"
+          value="{{ old('price') }}" 
           id="price" 
           name="price"
           placeholder="Comic price">
@@ -85,7 +91,8 @@
           <label for="series" class="form-label">Series</label>
           <input 
           type="text" 
-          class="form-control @error('series') is-invalid @enderror" 
+          class="form-control @error('series') is-invalid @enderror"
+          value="{{ old('series') }}" 
           id="series" 
           name="series"
           placeholder="Comic series">
@@ -99,7 +106,8 @@
           <label for="sales_date" class="form-label">Sales Date</label>
           <input 
           type="date" 
-          class="form-control @error('sales_date') is-invalid @enderror" 
+          class="form-control @error('sales_date') is-invalid @enderror"
+          value="{{ old('sales_date') }}" 
           id="sales_date" 
           name="sales_date"
           placeholder="Comic sales date">
@@ -113,7 +121,8 @@
           <label for="type" class="form-label">Type</label>
           <input 
           type="text" 
-          class="form-control @error('type') is-invalid @enderror" 
+          class="form-control @error('type') is-invalid @enderror"
+          value="{{ old('type') }}"
           id="type" 
           name="type"
           placeholder="Comic type">
@@ -131,7 +140,7 @@
           class="form-control" 
           id="description" 
           name="description"
-          placeholder="Comic description"></textarea>
+          placeholder="Comic description">{{-- mettiamo old() come "valore" della textarea --}}{{ old('description') }}</textarea>
           {{-- @error nella textarea non c'è perchè la descrizione non è obbligatoria --}}
         </div>
 
