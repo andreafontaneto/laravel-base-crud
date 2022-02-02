@@ -183,39 +183,9 @@ class ComicController extends Controller
     {
         // prima di aggiornare i dati faccio (ancora) la validazione
         $request->validate(
-            [
-                'title'=>"required|max:50|min:2",
-                'image'=>"required|max:255",
-                'price'=>"required|numeric|max:10|min:1",
-                'series'=>"required|max:50|min:2",
-                'sales_date'=>"required|max:10",
-                'type'=>"required|max:20|min:2"
-            ],
-            [
-                'title.required'=>'il titolo è obbligatorio',
-                'title.max'=>'il titolo deve essere massimo :max caratteri',
-                'title.min'=>'il titolo deve essere minimo :min caratteri',
-
-                'image.required'=>'l\'indirizzo dell\'immagine è obbligatorio',
-                'image.max'=>'l\'indirizzo dell\'immagine deve essere massimo :max caratteri',
-
-                'price.required'=>'il prezzo è obbligatorio',
-                'price.numeric'=>'il prezzo deve essere un numero',
-                'price.max'=>'il prezzo deve essere massimo :max caratteri',
-                'price.min'=>'il prezzo deve essere minimo :min carattere',
-
-                'series.required'=>'la serie è obbligatoria',
-                'series.max'=>'la serie deve essere massimo :max caratteri',
-                'series.min'=>'la serie deve essere minimo :min caratteri',
-
-                'sales_date.required'=>'la data di vendita è obbligatoria',
-                'sales_date.max'=>'la data di vendita deve essere massimo :max caratteri',
-
-                'type.required'=>'il tipo è obbligatorio',
-                'type.max'=>'il tipo deve essere massimo :max caratteri',
-                'type.min'=>'il tipo deve essere minimo :min caratteri',
-
-            ]
+            // richiamo le MIE funzioni per aiutarmi
+            $this->validationData(),
+            $this->validationError()
         );
 
         // da EDIT fatto il submit prendo tutti i dati che arrivano e li salvo 
@@ -252,5 +222,44 @@ class ComicController extends Controller
     // posso anche aggiungere le mie funzioni personali (private!) per aiutarmi nella stesura del codice
     private function createSlug($string){
         return Str::slug($string, '-');
+    }
+
+    private function validationData(){
+        return [
+            'title'=>"required|max:50|min:2",
+            'image'=>"required|max:255",
+            'price'=>"required|numeric|max:10|min:1",
+            'series'=>"required|max:50|min:2",
+            'sales_date'=>"required|max:10",
+            'type'=>"required|max:20|min:2"
+        ];
+    }
+
+    private function validationError(){
+        return [
+            'title.required'=>'il titolo è obbligatorio',
+            'title.max'=>'il titolo deve essere massimo :max caratteri',
+            'title.min'=>'il titolo deve essere minimo :min caratteri',
+
+            'image.required'=>'l\'indirizzo dell\'immagine è obbligatorio',
+            'image.max'=>'l\'indirizzo dell\'immagine deve essere massimo :max caratteri',
+
+            'price.required'=>'il prezzo è obbligatorio',
+            'price.numeric'=>'il prezzo deve essere un numero',
+            'price.max'=>'il prezzo deve essere massimo :max caratteri',
+            'price.min'=>'il prezzo deve essere minimo :min carattere',
+
+            'series.required'=>'la serie è obbligatoria',
+            'series.max'=>'la serie deve essere massimo :max caratteri',
+            'series.min'=>'la serie deve essere minimo :min caratteri',
+
+            'sales_date.required'=>'la data di vendita è obbligatoria',
+            'sales_date.max'=>'la data di vendita deve essere massimo :max caratteri',
+
+            'type.required'=>'il tipo è obbligatorio',
+            'type.max'=>'il tipo deve essere massimo :max caratteri',
+            'type.min'=>'il tipo deve essere minimo :min caratteri',
+
+        ];
     }
 }
